@@ -4,6 +4,7 @@ import { useEffect, useState, VFC } from 'react';
 import { useMatch } from 'react-location';
 import CircularProgress from '@mui/material/CircularProgress';
 import { Post } from 'src/types';
+import Box from '@mui/material/Box';
 
 export const PostDetailPage: VFC = () => {
   const { postId } = useMatch().params;
@@ -17,10 +18,16 @@ export const PostDetailPage: VFC = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading]);
 
-  if (isLoading) return <CircularProgress />;
+  if (isLoading) {
+    return (
+      <Box p={5}>
+        <CircularProgress />
+      </Box>
+    )
+  }
 
   if(isError) return <h3>sorry, happend some error :(</h3>
-  
+
   if (!post) return <h3>sorry, not found posts :(</h3>;
 
   return (
